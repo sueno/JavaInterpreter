@@ -19,13 +19,11 @@ public abstract class Ope_Core extends IngredientObj implements OperationType {
 	@Override
 	public ValueType operation(ValueType val1, ValueType val2) {
 		if (val1 != null && val2 != null) {
-			ValueType _val1 = (ValueType) val1.getValue();
-			ValueType _val2 = (ValueType) val2.getValue();
-			if (val1 instanceof SingleType && val2 instanceof SingleType) {
-				Double result = numCalc(((SingleType)_val1).getSingle(), ((SingleType)_val2).getSingle());
+			if (val1.getValueType() instanceof SingleType && val2.getValueType() instanceof SingleType) {
+				Double result = numCalc(((SingleType)val1.getValueType()).getSingle(), ((SingleType)val2.getValueType()).getSingle());
 				return new Val_Single(result);
 			} else {
-				return new Val_String(objCalc(_val1, _val2));
+				return new Val_String(objCalc(val1.getValue(), val2.getValue()));
 			}
 		} else {
 			return null;
